@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -13,6 +13,6 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	private String address;
-	private LocalDateTime birthDate;
+	private Date birthDate;
 	private int ratingClass;
 }
