@@ -1,4 +1,4 @@
-package org.finance.mybank.services;
+package org.finance.mybank.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

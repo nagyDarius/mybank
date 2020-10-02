@@ -2,8 +2,6 @@ package org.finance.mybank.web;
 
 import org.finance.mybank.dto.CustomerDTO;
 import org.finance.mybank.services.CustomerService;
-import org.finance.mybank.services.ValidationErrorService;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;

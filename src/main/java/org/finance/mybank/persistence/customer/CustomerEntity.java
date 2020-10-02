@@ -1,20 +1,21 @@
 package org.finance.mybank.persistence.customer;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.finance.mybank.persistence.BaseEntity;
+import org.finance.mybank.persistence.account.AccountEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.Date;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class CustomerEntity extends BaseEntity {
 	@Column
 	private String firstName;
@@ -26,4 +27,6 @@ public class CustomerEntity extends BaseEntity {
 	private Date birthDate;
 	@Column
 	private Integer ratingClass;
+	@OneToMany(mappedBy = "customer")
+	private List<AccountEntity> accounts;
 }

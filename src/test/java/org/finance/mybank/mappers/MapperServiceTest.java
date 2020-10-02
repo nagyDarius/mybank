@@ -18,12 +18,11 @@ class MapperServiceTest {
 
 	@Test
 	public void mapFromCustomerDtoToCustomerAndBack() {
-		final CustomerDTO customerDTO = new CustomerDTO(
-				"Mario",
-				"Speedwagon",
-				"Train Station 2",
-				"2000-04-23",
-				3);
+		final CustomerDTO customerDTO = CustomerDTO.builder()
+				.firstName("Mario")
+				.lastName("Speedwagon")
+				.address("Train Station 2")
+				.birthDate("2000-04-23").build();
 
 		final Customer customer = mapperService.map(customerDTO, Customer.class);
 		final CustomerDTO mappedCustomerDTO = mapperService.map(customer, CustomerDTO.class);
