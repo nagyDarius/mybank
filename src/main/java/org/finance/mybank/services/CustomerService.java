@@ -7,6 +7,8 @@ import org.finance.mybank.persistence.customer.CustomerEntity;
 import org.finance.mybank.persistence.customer.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import static org.finance.mybank.util.Constants.DEFAULT_RATING_CLASS;
+
 @Service
 public class CustomerService {
 	private final CustomerRepository customerRepository;
@@ -19,6 +21,9 @@ public class CustomerService {
 
 	public void createCustomer(CustomerDTO customerDTO) {
 		final var customer = mapperService.map(customerDTO, Customer.class);
+		if(customer.getRatingClass() == null){
+			customer.setRatingClass(DEFAULT_RATING_CLASS);
+		}
 		final var customerEntity = mapperService.map(customer, CustomerEntity.class);
 		customerRepository.save(customerEntity);
 	}

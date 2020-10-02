@@ -3,6 +3,7 @@ package org.finance.mybank.persistence.customer;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.finance.mybank.persistence.BaseEntity;
+import org.finance.mybank.util.Constants;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,5 +22,5 @@ public class CustomerEntity extends BaseEntity {
 	@Column
 	private Date birthDate;
 	@Column
-	private int ratingClass = 2; // Default rating class
+	private Integer ratingClass;
 }

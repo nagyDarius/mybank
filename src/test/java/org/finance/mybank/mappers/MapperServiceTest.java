@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @ActiveProfiles("test")
-class MapperServiceIT {
+class MapperServiceTest {
 
 	@Autowired
 	private MapperService mapperService;

@@ -14,5 +14,5 @@ public class Customer {
 	private String lastName;
 	private String address;
 	private Date birthDate;
-	private int ratingClass;
+	private Integer ratingClass;
 }
