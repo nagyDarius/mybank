@@ -34,7 +34,7 @@ public class CustomerController {
 	@GetMapping
 	public ResponseEntity<?> queryByLastName(@RequestParam String lastName,
 											 @RequestParam(required = false) String sort,
-											 @RequestParam(required = false) Sort.Direction direction) {
+											 @RequestParam(required = false) String direction) {
 		return ResponseEntity.ok(customerService.getSortedCustomersByLastName(lastName, direction, sort));
 	}
 }

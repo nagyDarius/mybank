@@ -18,6 +18,7 @@ import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -34,6 +35,7 @@ class CustomerControllerQueryTest extends BaseMvcIT {
 		final CustomerEntity customer3 = new CustomerEntity("Anna", "Cruiser", "Sthesia address", birthDate, 3);
 		final CustomerEntity customer4 = new CustomerEntity("Paul", "Cruiser", "Molive address", birthDate, 3);
 		final CustomerEntity customer5 = new CustomerEntity("Gail", "Forcewind", "Forcewind address", birthDate, 3);
+		customerRepository.deleteAll();
 		customerRepository.saveAll(asList(customer1, customer2, customer3, customer4, customer5));
 	}
 
@@ -54,5 +56,29 @@ class CustomerControllerQueryTest extends BaseMvcIT {
 		assertEquals("Paul", customerDTOS.get(1).getFirstName());
 		assertEquals("Mario", customerDTOS.get(2).getFirstName());
 		assertEquals("Anna", customerDTOS.get(3).getFirstName());
+	}
+
+	@Test
+	@WithMockUser
+	public void getCustomersWithWrongSortShouldReturnErrorMessage() throws Exception {
+		mockMvc.perform(get("/customer")
+				.param("lastName", "Cruiser")
+				.param("sort", "birthDate")
+				.param("direction", "DESC")
+				.with(csrf()))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.message").value("Invalid value 'birthDate' for sort given! Has to be one of 'firstName', 'address'."));
+	}
+
+	@Test
+	@WithMockUser
+	public void getCustomersWithWrongDirectionShouldReturnErrorMessage() throws Exception {
+		mockMvc.perform(get("/customer")
+				.param("lastName", "Cruiser")
+				.param("sort", "firstName")
+				.param("direction", "dec")
+				.with(csrf()))
+				.andExpect(status().isBadRequest())
+				.andExpect(jsonPath("$.message").value("Invalid value 'dec' for orders given! Has to be either 'desc' or 'asc' (case insensitive)."));
 	}
 }

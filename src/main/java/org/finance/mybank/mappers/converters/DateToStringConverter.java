@@ -2,7 +2,7 @@ package org.finance.mybank.mappers.converters;
 
 import ma.glasnost.orika.converter.BidirectionalConverter;
 import ma.glasnost.orika.metadata.Type;
-import org.finance.mybank.exception.MyInvalidDateException;
+import org.finance.mybank.exception.InvalidDateException;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
@@ -12,7 +12,7 @@ import java.util.Date;
 import static org.finance.mybank.util.Constants.DATE_FORMAT;
 
 @Component
-public class MyDateToStringConverter extends BidirectionalConverter<Date, String> {
+public class DateToStringConverter extends BidirectionalConverter<Date, String> {
 
 	private final SimpleDateFormat format = new SimpleDateFormat(DATE_FORMAT);
 
@@ -26,7 +26,7 @@ public class MyDateToStringConverter extends BidirectionalConverter<Date, String
 		try {
 			return format.parse(source);
 		} catch (ParseException e) {
-			throw new MyInvalidDateException(source);
+			throw new InvalidDateException(source);
 		}
 	}
 }
