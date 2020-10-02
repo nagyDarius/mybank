@@ -2,6 +2,7 @@ package org.finance.mybank.exception.handlers;
 
 import org.finance.mybank.exception.InvalidDateException;
 import org.finance.mybank.exception.InvalidQueryParamException;
+import org.finance.mybank.exception.NotEnoughBalanceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import static org.finance.mybank.exception.handlers.ApiResponseMessage.apiRespon
 
 @ControllerAdvice
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
-	@ExceptionHandler({InvalidDateException.class, InvalidQueryParamException.class})
+	@ExceptionHandler({InvalidDateException.class, InvalidQueryParamException.class, NotEnoughBalanceException.class})
 	protected ResponseEntity<?> handleBadRequest(RuntimeException e) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 				.contentType(MediaType.APPLICATION_JSON)

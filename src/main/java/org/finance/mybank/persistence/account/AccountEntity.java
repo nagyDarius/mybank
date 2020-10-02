@@ -3,11 +3,10 @@ package org.finance.mybank.persistence.account;
 import lombok.*;
 import org.finance.mybank.persistence.BaseEntity;
 import org.finance.mybank.persistence.customer.CustomerEntity;
+import org.finance.mybank.persistence.posting.PostingEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -19,6 +18,8 @@ public class AccountEntity extends BaseEntity {
 	@Column
 	private Double balance;
 	@ManyToOne
-	@JoinColumn(name = "customerId", nullable = false)
+//	@JoinColumn(name = "customerId", nullable = false)
 	private CustomerEntity customer;
+	@OneToMany
+	private List<PostingEntity> postings;
 }

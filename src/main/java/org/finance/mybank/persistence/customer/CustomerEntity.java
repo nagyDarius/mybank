@@ -4,6 +4,7 @@ import lombok.*;
 import org.finance.mybank.persistence.BaseEntity;
 import org.finance.mybank.persistence.account.AccountEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -27,6 +28,6 @@ public class CustomerEntity extends BaseEntity {
 	private Date birthDate;
 	@Column
 	private Integer ratingClass;
-	@OneToMany(mappedBy = "customer")
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<AccountEntity> accounts;
 }

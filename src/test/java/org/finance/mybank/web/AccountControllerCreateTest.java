@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class AccountControllerTest extends BaseMvcIT {
+public class AccountControllerCreateTest extends BaseMvcIT {
 
 	@Autowired
 	private AccountRepository accountRepository;
