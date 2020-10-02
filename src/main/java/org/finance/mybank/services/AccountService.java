@@ -1,5 +1,6 @@
 package org.finance.mybank.services;
 
+import org.finance.mybank.dto.AccountBalanceDTO;
 import org.finance.mybank.dto.PostingDTO;
 import org.finance.mybank.exception.InvalidQueryParamException;
 import org.finance.mybank.exception.NotEnoughBalanceException;
@@ -10,6 +11,9 @@ import org.finance.mybank.persistence.customer.CustomerRepository;
 import org.finance.mybank.persistence.posting.PostingEntity;
 import org.finance.mybank.persistence.posting.PostingRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountService {
@@ -49,5 +53,11 @@ public class AccountService {
 		from.setBalance(from.getBalance() - amount);
 		to.setBalance(to.getBalance() + amount);
 		postingRepository.save(new PostingEntity(amount, from, to));
+	}
+
+	public List<AccountBalanceDTO> findByCustomerId(Long customerId) {
+		return accountRepository.findAllByCustomer_Id(customerId).stream()
+				.map(account -> new AccountBalanceDTO(account.getBalance(), account.getId()))
+				.collect(Collectors.toList());
 	}
 }

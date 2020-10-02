@@ -35,6 +35,4 @@ public class CustomerController {
 											 @RequestParam(required = false) String direction) {
 		return ResponseEntity.ok(customerService.getSortedCustomersByLastName(lastName, direction, sort));
 	}
-
-
 }

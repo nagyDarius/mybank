@@ -33,4 +33,9 @@ public class AccountController {
 		accountService.transfer(posting);
 		return ResponseEntity.ok().build();
 	}
+
+	@GetMapping
+	public ResponseEntity<?> listAccountsForCustomer(@RequestParam Long customerId){
+		return ResponseEntity.ok(accountService.findByCustomerId(customerId));
+	}
 }
