@@ -10,3 +10,4 @@
 ## Usage
 
 After starting the app, please go to localhost:3001/api/api-ui to get all the information needed on how to use this service.
+The login for the api is admin, admin. You can change it in WebConfig.
