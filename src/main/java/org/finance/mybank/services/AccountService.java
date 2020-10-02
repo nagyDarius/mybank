@@ -20,7 +20,7 @@ public class AccountService {
 
 	public void createAccountForCustomer(Long customerId) {
 		final CustomerEntity customerEntity = customerRepository.findById(customerId)
-				.orElseThrow(() -> new InvalidQueryParamException(String.format("Customer with id %s was not found!", customerId)));
+				.orElseThrow(() -> new InvalidQueryParamException(String.format("Customer with id '%s' was not found!", customerId)));
 		final AccountEntity accountEntity = AccountEntity.builder().balance(0D).customer(customerEntity).build();
 		accountRepository.save(accountEntity);
 	}

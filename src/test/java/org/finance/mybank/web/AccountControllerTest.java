@@ -13,6 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class AccountControllerTest extends BaseMvcIT {
@@ -33,6 +34,14 @@ public class AccountControllerTest extends BaseMvcIT {
 		assertEquals(1, accounts.size());
 		assertEquals(0, accounts.get(0).getBalance());
 		assertEquals(john.getFirstName(), accounts.get(0).getCustomer().getFirstName());
+	}
+
+	@Test
+	@WithMockUser
+	public void createAccountForNonExistingCustomerShouldReturnAppropriateMessage() throws Exception {
+		mockMvc.perform(post("/account").param("customerId", "34").with(csrf()))
+				.andExpect(status().isBadRequest())
+		.andExpect(jsonPath("$.message").value("Customer with id '34' was not found!"));
 	}
 
 }
