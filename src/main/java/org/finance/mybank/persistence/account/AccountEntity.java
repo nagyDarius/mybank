@@ -18,7 +18,6 @@ public class AccountEntity extends BaseEntity {
 	@Column
 	private Double balance;
 	@ManyToOne
-//	@JoinColumn(name = "customerId", nullable = false)
 	private CustomerEntity customer;
 	@OneToMany
 	private List<PostingEntity> postings;
