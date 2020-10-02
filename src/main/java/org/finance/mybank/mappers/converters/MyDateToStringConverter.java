@@ -5,9 +5,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.Locale;
 
+import static org.finance.mybank.util.Constants.DATE_FORMAT;
+
 @Component
 public class MyDateToStringConverter extends DateToStringConverter {
 	public MyDateToStringConverter() {
-		super("yyyy-MM-dd", Locale.getDefault());
+		super(DATE_FORMAT, Locale.getDefault());
 	}
 }

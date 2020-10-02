@@ -6,7 +6,7 @@ import org.finance.mybank.persistence.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -19,7 +19,7 @@ public class CustomerEntity extends BaseEntity {
 	@Column
 	private String address;
 	@Column
-	private LocalDateTime birthDate;
+	private Date birthDate;
 	@Column
 	private int ratingClass = 2; // Default rating class
 }
