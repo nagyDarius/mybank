@@ -40,7 +40,8 @@ public class AccountControllerTransferTest extends BaseMvcIT {
 		final AccountEntity to = accountRepository.save(new AccountEntity(0D, null, null));
 
 		mockMvc.perform(post("/account/transfer").contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(new PostingDTO(5.5, from.getId(), to.getId())))
+				.content(mapper.writeValueAsString(
+						new PostingDTO(0L, 5.5, from.getId(), to.getId())))
 				.with(csrf()))
 				.andExpect(status().isOk());
 
@@ -63,7 +64,7 @@ public class AccountControllerTransferTest extends BaseMvcIT {
 		final AccountEntity to = accountRepository.save(new AccountEntity(0D, null, null));
 
 		mockMvc.perform(post("/account/transfer").contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(new PostingDTO(15.5, from.getId(), to.getId())))
+				.content(mapper.writeValueAsString(new PostingDTO(0L, 15.5, from.getId(), to.getId())))
 				.with(csrf()))
 				.andExpect(status().isBadRequest())
 				.andExpect(jsonPath("$.message").value(new NotEnoughBalanceException(10D, 15.5).getMessage()));
@@ -73,7 +74,7 @@ public class AccountControllerTransferTest extends BaseMvcIT {
 	@WithMockUser
 	public void transferWithIncorrectAccountId() throws Exception {
 		mockMvc.perform(post("/account/transfer").contentType(MediaType.APPLICATION_JSON)
-				.content(mapper.writeValueAsString(new PostingDTO(15.5, 4L, 2L)))
+				.content(mapper.writeValueAsString(new PostingDTO(0L, 15.5, 4L, 2L)))
 				.with(csrf()))
 				.andExpect(status().isBadRequest())
 				.andExpect(jsonPath("$.message").value("Account with id '4' was not found!"));
