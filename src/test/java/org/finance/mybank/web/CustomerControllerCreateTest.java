@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class CustomerControllerTest extends BaseMvcIT {
+class CustomerControllerCreateTest extends BaseMvcIT {
 
 	@Autowired
 	private CustomerRepository customerRepository;

@@ -1,9 +1,10 @@
 package org.finance.mybank.persistence.customer;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.finance.mybank.persistence.BaseEntity;
-import org.finance.mybank.util.Constants;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,8 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomerEntity extends BaseEntity {
 	@Column
 	private String firstName;

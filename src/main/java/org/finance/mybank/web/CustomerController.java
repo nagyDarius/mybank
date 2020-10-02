@@ -3,12 +3,10 @@ package org.finance.mybank.web;
 import org.finance.mybank.dto.CustomerDTO;
 import org.finance.mybank.services.CustomerService;
 import org.finance.mybank.services.ValidationErrorService;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -31,5 +29,12 @@ public class CustomerController {
 			return errorMap;
 		customerService.createCustomer(customerDTO);
 		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping
+	public ResponseEntity<?> queryByLastName(@RequestParam String lastName,
+											 @RequestParam(required = false) String sort,
+											 @RequestParam(required = false) Sort.Direction direction) {
+		return ResponseEntity.ok(customerService.getSortedCustomersByLastName(lastName, direction, sort));
 	}
 }
